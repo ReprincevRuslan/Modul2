@@ -1,0 +1,249 @@
+#include <iostream>
+
+using namespace std;
+
+struct TTime {
+
+int
+
+hour,
+
+min,
+
+sec;
+
+TTime() {
+
+hour = 0;
+
+min = 0;
+
+sec = 0;
+
+}
+
+ 
+
+TTime(int Hour, int Min, int Sec) {
+
+hour = Hour;
+
+min = Min;
+
+sec = Sec;
+
+}
+
+};
+
+ 
+
+void To12h(TTime T, bool PM) {
+
+if (T.hour < 0 || T.hour > 23 || T.min < 0 || T.min > 59 || T.sec < 0 || T.sec > 59) {
+
+// неправильний час
+
+cout << "00:00:00\n";
+
+return;
+
+}
+
+if (T.hour == 0) T.hour = 12; // 12:00:00 AM
+
+else if (T.hour > 12) T.hour -= 12; // ПМ формат
+
+cout << T.hour << ":" << T.min << ":" << T.sec << " ";
+
+if (PM) cout << "PM\n";
+
+else cout << "AM\n";
+
+}
+
+ 
+
+ 
+
+void task1() {
+
+TTime times[5] = {
+
+  {8, 30, 0},
+
+  {12, 0, 0},
+
+  {14, 45, 30},
+
+  {23, 59, 59},
+
+  {1, 15, 0}
+
+};
+
+for (int i = 0; i < 5; i++) {
+
+cout << "Before conversion: " << times[i].hour << ":" << times[i].min << ":" << times[i].sec << "\n";
+
+To12h(times[i], times[i].hour >= 12);
+
+}
+
+}
+
+ 
+
+struct begin17 {
+
+int a,b,c;
+
+bool bool17() {
+
+return (a!= 0)&&(b != 0)&&( c!= 0);
+
+}
+
+double sum() {
+
+return abs(c - a)+ abs(c - b);
+
+}
+
+ 
+
+};
+
+ 
+
+void task2() {
+
+begin17 task{};
+
+cout << "Enter a:";
+
+cin >> task.a;
+
+cout << "Enter b:";
+
+cin >> task.b;
+
+cout << "Enter c:";
+
+cin >> task.c;
+
+if (task.bool17())
+
+{
+
+cout << "Sum=" << task.sum() << endl;
+
+}
+
+}
+
+struct boolean11
+
+{
+
+int a, b;
+
+ 
+
+bool bool11() {
+
+if (a==0 ||b==0)
+
+{
+
+return false;
+
+ 
+
+}
+
+return true;
+
+}
+
+ 
+
+bool par()
+
+{
+
+if (a % 2 == b % 2)
+
+{
+
+return true;
+
+}
+
+return false;
+
+}
+
+};
+
+ 
+
+void task3() {
+
+boolean11 obj{};
+
+cout << "Enter a:";
+
+cin >> obj.a;
+
+cout << "Enter b:";
+
+cin >> obj.b;
+
+if (obj.bool11())
+
+{
+
+if (obj.par())
+
+{
+
+cout << "Yes" << endl;
+
+}
+
+else
+
+{
+
+cout << "No" << endl;
+
+ 
+
+}
+
+}
+
+else
+
+{
+
+cerr << "Error" << endl;
+
+}
+
+}
+
+ 
+
+int main() {
+
+task1();
+
+task2();
+
+task3();
+
+return 0;
+
+}
