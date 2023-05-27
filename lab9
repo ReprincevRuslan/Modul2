@@ -1,0 +1,92 @@
+#include <iostream>
+#include <string>
+#include <fstream>
+using namespace std;
+
+
+size_t my_find_last_of(const char* s, size_t pos, const char* str) {
+    size_t s_len = strlen(s);
+    size_t str_len = strlen(str);
+    if (pos > s_len) {
+        pos = s_len;
+    }
+    for (size_t i = pos; i > 0; i--) {
+        for (size_t j = 0; j < str_len; j++) {
+            if (s[i - 1] == str[j]) {
+                return i - 1;
+            }
+        }
+    }
+    return std::string::npos;
+}
+
+
+void task1()
+{
+    char s[100];
+    cin.get(s, 100);
+    string str(s);
+    const char* chars = "a";
+    size_t pos = str.find_last_of(chars);
+    size_t my_pos = my_find_last_of(s, string::npos, chars);
+    cout << "pos = " << pos + 1 << endl;
+    cout << "my_pos = " << my_pos + 1 << endl;
+}
+
+string remove_first_match(string s, string s0) {
+    size_t index = s.find(s0);
+    if (index == string::npos) {
+        return s;
+    }
+    return s.substr(0, index) + s.substr(index + s0.length());
+}
+
+bool satisfies_conditions(string s) {
+    // Перевіряємо, чи рядок починається з великої літери
+    if (!isupper(s[0])) {
+        return true;
+    }
+    // Перевіряємо, чи рядок містить тільки літери та пробіли
+    for (char c : s) {
+        if (!isalpha(c) && c != ' ') {
+            return true;
+        }
+    }
+    return false;
+}
+void task2() {
+    string s0;
+    cout << "Enter a string to search for: ";
+    cin >> s0;
+
+    ifstream input_file("input.txt");
+    if (!input_file.is_open()) {
+        cout << "Error: Could not open file \"input.txt\"" << endl;
+    }
+
+    ofstream output_file("output.txt");
+    if (!output_file.is_open()) {
+        cout << "Error: Could not open file\"output.txt\"" << endl;
+
+    }
+    else
+    {
+        string line;
+        while (getline(input_file, line)) {
+            line = remove_first_match(line, s0);
+            if (satisfies_conditions(line)) {
+                output_file << line << endl;
+            }
+        }
+        cout << "The result is saved in a file \"output.txt\"" << endl;
+
+    }
+}
+
+
+
+int main()
+{
+    task1();
+    task2();
+}
